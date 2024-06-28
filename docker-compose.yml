@@ -1,3 +1,51 @@
+#version: '3.8'
+#
+#services:
+#  mysql:
+#    image: mysql:8.0.35
+#    container_name: bloodbank
+#    environment:
+#      MYSQL_USER: hari
+#      MYSQL_PASSWORD: HA1256ri#
+#      MYSQL_DATABASE: BloodBank
+#      MYSQL_ROOT_PASSWORD: HA1256ri#
+#    ports:
+#      - "3307:3306"
+#    volumes:
+#      - db_data:/var/lib/mysql
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "--silent"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#
+#  app:
+#    image: back-blood
+#    container_name: springboot-app
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/BloodBank
+#      SPRING_DATASOURCE_USERNAME: hari
+#      SPRING_DATASOURCE_PASSWORD: HA1256ri#
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#
+#  react_app:
+#    image: front-blood
+#    container_name: react_app
+#    ports:
+#      - "3000:80"
+#    depends_on:
+#      - springboot-app
+#
+#volumes:
+#  db_data:
+#networks:
+#  default:
+#    driver: bridge
 version: '3.8'
 
 services:
@@ -39,7 +87,7 @@ services:
     ports:
       - "3000:80"
     depends_on:
-      - springboot-app
+      - app  # Correct service name here
 
 volumes:
   db_data:
