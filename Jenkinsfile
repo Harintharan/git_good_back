@@ -80,6 +80,21 @@ pipeline {
         }
 
 
+        stage('Deploy with Docker Compose') {
+            steps {
+                script {
+                    dir('backend') {
+                        sh '''
+                            docker-compose down
+                            docker-compose up -d
+                            '''
+                    }
+                    //sh 'docker start mycloud-backend-2 || true'
+                }
+            }
+        }
+
+
 
 
 
