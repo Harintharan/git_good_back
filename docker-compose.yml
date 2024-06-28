@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   mysql:
-    # image: mysql:5.7
     image: mysql:8.0.35
     container_name: bloodbank
     environment:
@@ -21,7 +20,7 @@ services:
       retries: 5
 
   app:
-    image: app
+    image: back-blood
     container_name: springboot-app
     ports:
       - "8081:8081"
@@ -29,16 +28,13 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/BloodBank
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/BloodBank
       SPRING_DATASOURCE_USERNAME: hari
       SPRING_DATASOURCE_PASSWORD: HA1256ri#
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      # spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
 
   react_app:
-    build:
-      context: .
+    image: front-blood
     container_name: react_app
     ports:
       - "3000:80"
