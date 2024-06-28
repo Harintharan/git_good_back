@@ -13,7 +13,7 @@ pipeline {
         DB_IMAGE = 'mysql:8.0.35'
         BACKEND_IMAGE = 'back-blood'
         FRONTEND_IMAGE = 'front-blood'
-        DOCKER_COMPOSE_PATH = '/usr/local/bin'
+        DOCKER_COMPOSE_PATH = '/snap/bin'
         DOCKER_USERNAME = credentials('DOCKER_HUB_USERNAME')
         DOCKER_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
 
