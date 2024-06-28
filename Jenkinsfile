@@ -81,7 +81,7 @@ pipeline {
             steps {
                 script {
                                     // Ensure we are in the directory containing docker-compose.yml
-                                    dir('.') {
+                                    dir('backend') {
                                         withEnv(["PATH+DOCKER_COMPOSE=${DOCKER_COMPOSE_PATH}"]) {
                                             sh '''
                                                 docker-compose down
