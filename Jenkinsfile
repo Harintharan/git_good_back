@@ -13,7 +13,7 @@ pipeline {
         DB_IMAGE = 'mysql:8.0.35'
         BACKEND_IMAGE = 'back-blood'
         FRONTEND_IMAGE = 'front-blood'
-       // DOCKER_COMPOSE_PATH = '/usr/local/bin'
+        DOCKER_COMPOSE_PATH = '/usr/local/bin'
         DOCKER_USERNAME = credentials('DOCKER_HUB_USERNAME')
         DOCKER_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
 
@@ -83,13 +83,13 @@ pipeline {
         stage('Deploy with Docker Compose') {
             steps {
                 script {
-                    dir('backend') {
+                    withEnv(["PATH+DOCKER_COMPOSE=${DOCKER_COMPOSE_PATH}"]) {
                         sh '''
                             docker-compose down
                             docker-compose up -d
                             '''
                     }
-                    //sh 'docker start mycloud-backend-2 || true'
+                    sh 'docker start mycloud-backend-2 || true'
                 }
             }
         }
