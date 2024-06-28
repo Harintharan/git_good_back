@@ -80,14 +80,16 @@ pipeline {
         stage('Deploy with Docker Compose') {
             steps {
                 script {
-                    withEnv(["PATH+DOCKER_COMPOSE=${DOCKER_COMPOSE_PATH}"]) {
-                        sh '''
-                            docker-compose down
-                            docker-compose up -d
-                        '''
-                    }
-                    sh 'docker start mycloud-backend-2 || true'
-                }
+                                    // Ensure we are in the directory containing docker-compose.yml
+                                    dir('.') {
+                                        withEnv(["PATH+DOCKER_COMPOSE=${DOCKER_COMPOSE_PATH}"]) {
+                                            sh '''
+                                                docker-compose down
+                                                docker-compose up -d
+                                            '''
+                                        }
+                                    }
+                                }
             }
         }
     }
